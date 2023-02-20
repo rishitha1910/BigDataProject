@@ -1,0 +1,47 @@
+package recfun
+import common._
+
+object Main {
+
+  def balance(chars: String) = {
+    def balanceRecursion(chars: List[Char], count: Int): Boolean=
+    {
+      if (count < 0) 
+      {
+        false
+      }
+      else if (chars.isEmpty) 
+      {
+        count == 0
+      }
+      else if (chars.head == '(') 
+      {
+        balanceRecursion(chars.tail, count + 1)
+      }
+      else if (chars.head == ')') 
+      {
+        balanceRecursion(chars.tail, count - 1)
+      }
+      else 
+      {
+        balanceRecursion(chars.tail, count)
+      }
+    }
+    balanceRecursion(chars.toList,0)
+  }
+
+  def countChange(money: Int, coins: List[Int]): Int = {
+
+  def  countChangeBOX(moneyLeft: Int, coinsLeft: List[Int]): Int = {
+    if (moneyLeft == 0) {
+    1
+    } else if (moneyLeft < 0 || coinsLeft.isEmpty) {
+    0
+    } else {
+  countChangeBOX(moneyLeft - coinsLeft.head, coinsLeft) + countChangeBOX(moneyLeft, coinsLeft.tail)  
+  }
+  }
+
+  countChangeBOX(money, coins)
+}
+}
